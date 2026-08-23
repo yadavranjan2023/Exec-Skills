@@ -1,0 +1,66 @@
+# .github/workflows/validate-skill-files.yml
+#
+# Runs on every PR that touches a SKILL.md file (or on manual trigger)
+# and fails the check if any file doesn't pass validate_skill.py.
+#
+# Setup:
+#   1. Place this file at .github/workflows/validate-skill-files.yml
+#   2. Place validate_skill.py at scripts/validate_skill.py (or update
+#      the path below)
+#   3. In GitHub: Settings > Branches > Branch protection rule >
+#      "Require status checks to pass before merging" > select
+#      "validate-skill-files" once it has run at least once.
+
+name: Validate SKILL.md files
+
+on:
+  pull_request:
+    paths:
+      - "**/*SKILL.md"
+      - "**/*.SKILL.md"
+      - "scripts/validate_skill.py"
+  push:
+    branches: [main]
+    paths:
+      - "**/*SKILL.md"
+      - "**/*.SKILL.md"
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Find SKILL.md files
+        id: find_files
+        run: |
+          FILES=$(git ls-files | grep -E '(SKILL\.md|\.SKILL\.md)$' || true)
+          if [ -z "$FILES" ]; then
+            echo "No SKILL.md files found in repo."
+            echo "files=" >> "$GITHUB_OUTPUT"
+          else
+            echo "Found files:"
+            echo "$FILES"
+            {
+              echo "files<<EOF"
+              echo "$FILES"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run validator
+        if: steps.find_files.outputs.files != ''
+        run: |
+          python scripts/validate_skill.py ${{ steps.find_files.outputs.files }} --max-age-days 100

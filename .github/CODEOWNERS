@@ -1,0 +1,23 @@
+# CODEOWNERS for exec-skills repo
+# Requires the listed owner(s) to approve any PR touching that path.
+# Enable in GitHub: Settings > Branches > Branch protection rule >
+# "Require review from Code Owners" (this file must live at
+# .github/CODEOWNERS, /CODEOWNERS, or /docs/CODEOWNERS in the repo root).
+
+# Shared base template — changes here affect every role, require
+# broader sign-off (e.g., Chief of Staff + General Counsel).
+/_base/                 @chief-of-staff-github-handle @general-counsel-github-handle
+
+# Per-role manifests — only that executive (or their named delegate)
+# and the accountable governance function can approve changes.
+/ceo/                   @ceo-github-handle @chief-of-staff-github-handle
+/cto/                   @cto-github-handle @ciso-github-handle
+/cpo/                   @cpo-github-handle @privacy-officer-github-handle
+/clo/                   @clo-github-handle @general-counsel-github-handle
+
+# CI/governance tooling itself — require security + legal sign-off
+# since this controls how the lint/validation checks behave.
+/.github/               @general-counsel-github-handle @ciso-github-handle
+
+# Replace every @handle above with real GitHub usernames or team
+# handles (e.g., @yourorg/legal-team) before enabling branch protection.
