@@ -1,0 +1,38 @@
+name: Validate SKILL.md files
+
+on:
+  pull_request:
+    paths:
+      - "skills/exec-skills-governance/**"
+  push:
+    branches: [main]
+    paths:
+      - "skills/exec-skills-governance/**"
+  workflow_dispatch: {}
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Run validator
+        run: |
+          python skills/exec-skills-governance/scripts/validate_skill.py \
+            skills/exec-skills-governance/references/base.md \
+            skills/exec-skills-governance/references/ceo.md \
+            skills/exec-skills-governance/references/cto.md \
+            skills/exec-skills-governance/references/cpo.md \
+            skills/exec-skills-governance/references/clo.md \
+            --max-age-days 100

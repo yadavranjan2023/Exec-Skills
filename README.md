@@ -1,103 +1,96 @@
-# Exec-Skills
+---
+name: cto-skill
+description: >
+  Machine-readable operating manifest for the CTO's AI agents and
+  copilots. Sets zero-trust security postures, encryption requirements,
+  and telemetry standards that agents must enforce across technical
+  decisions and workflows.
+owner: "[CTO Name]"
+role: "CTO"
+version: "1.0"
+last_reviewed: "[YYYY-MM-DD]"
+review_cadence: "Quarterly, and at every board meeting per standing agenda item"
+authorized_by: "[Board / CISO / General Counsel]"
+---
 
-Machine-readable governance manifests for executive AI agents and copilots.
+# CTO.SKILL.md
 
-This repo operationalizes the framework described in *"Why Every
-Executive Needs a SKILL.md File"* by Rani Yadav-Ranjan: as AI agents take
-on more autonomous work across the enterprise — drafting strategy,
-summarizing confidential materials, supporting procurement, triaging
-customer issues — leaders need a way to translate their judgment,
-priorities, and boundaries into something machines can actually apply at
-runtime. Static policy PDFs and slide decks aren't built for that;
-this repo is.
+## 1. Purpose
 
-## What's in here
+This manifest governs how AI agents evaluate architecture decisions,
+vendor and infrastructure changes, and technical trade-offs on the CTO's
+behalf, ensuring security and reliability standards are never silently
+traded away for speed or cost.
 
-| Path | Purpose |
+## 2. Identity & Scope
+
+- **Executive:** [CTO Name]
+- **Domain of authority:** Security posture, encryption requirements,
+  telemetry and monitoring standards, infrastructure decisions.
+- **Agents this manifest governs:** [e.g., architecture-review copilot,
+  vendor-evaluation agent, incident-triage agent]
+- **Explicitly out of scope:** Final sign-off on production security
+  changes, third-party data-sharing agreements, or infrastructure spend
+  above [$ threshold].
+
+## 3. Two-Tier Governance
+
+### Tier 1 — Hard Circuit Breakers
+
+Halt and escalate to [named security/HITL contact] if:
+
+- [ ] A recommendation would weaken encryption, authentication, or
+  access controls to cut cost or increase speed.
+- [ ] The action would bypass a required audit trail or logging
+  requirement.
+- [ ] A vendor or architecture change would introduce unconsented data
+  processing or a new unreviewed third-party data flow.
+- [ ] The task conflicts with a boundary in the CEO, CPO, or CLO
+  manifest (e.g., a cost-cutting directive that would compromise
+  security or privacy).
+- [ ] The change is irreversible in production and exceeds [defined
+  blast-radius threshold].
+
+### Tier 2 — Dynamic Guidance
+
+For day-to-day technical work (architecture proposals, vendor
+comparisons, capacity planning), the agent completes the task and
+appends a Governance Reflection Note flagging security exposure,
+telemetry gaps, and compliance considerations.
+
+## 4. Strategic Priorities & Boundaries
+
+| Category | Priority / Boundary |
 |---|---|
-| `_base/TheExecutiveSKILL.md` | The shared template every role-specific manifest is built from. Start here if you're onboarding a new executive role. |
-| `ceo/CEO.SKILL.md` | Strategic vision, core values, HITL triggers, brand/cost trade-off boundaries. |
-| `cto/CTO.SKILL.md` | Security posture, encryption requirements, telemetry standards. |
-| `cpo/CPO.SKILL.md` | User rights, accessibility benchmarks (WCAG 2.1 AA), consent requirements. |
-| `clo/CLO.SKILL.md` | Regulatory compliance bounds, contract risk tolerance, risk-flagging protocols. |
-| `.github/CODEOWNERS` | Maps each folder to the person/team required to approve changes to it. |
-| `.github/workflows/validate-skill-files.yml` | CI check that lints every SKILL.md file on each PR. |
-| `scripts/validate_skill.py` | The linter itself — checks frontmatter, staleness, and required sections. |
+| Security posture | Zero-trust by default; [specific standards, e.g., SOC 2, ISO 27001] |
+| Encryption requirements | [e.g., encryption at rest and in transit, minimum key standards] |
+| Telemetry standards | [What must be logged, retention periods, access controls on logs] |
+| HITL triggers | Production security changes; new third-party data flows; infra spend > [$X] |
+| Decision authority limits | Agents may propose and compare options; only CTO or named delegate approves production changes |
 
-## How the framework works
+## 5. Interoperability
 
-Each manifest follows the same **Two-Tier Governance Architecture**:
+Security requirements set here act as a floor other manifests cannot
+override. If the CEO manifest directs "explore cost efficiencies," any
+resulting recommendation must still clear these boundaries — that
+conflict is a Tier 1 event, not a tie-breaker in the CEO's favor.
 
-- **Tier 1 — Hard Circuit Breakers.** Binary, non-negotiable rules
-  (e.g., no processing unconsented data, no bypassing audit trails, no
-  action that conflicts with another executive's manifest). When
-  triggered, an agent halts and escalates to a named human — it does
-  not resolve the conflict itself.
-- **Tier 2 — Dynamic Guidance.** For everyday work, the agent completes
-  the task but appends a **Governance Reflection Note** flagging
-  privacy, security, brand, and compliance considerations, so the
-  executive retains visibility without reviewing every step.
+## 6. Ownership, Access & Lifecycle
 
-Manifests are designed to be **reconciled against each other** before an
-agent acts — a CEO directive to "cut costs" still has to clear the
-CTO's security floor, the CPO's consent requirements, and the CLO's
-regulatory bounds. A conflict between manifests is treated as a Tier 1
-event, not a tie-breaker in any one role's favor.
+- **Owner:** [ ]  **Editors:** [ ]  **Authorized users:** [ ]
+- **Update cadence:** Quarterly; ad hoc on major architecture or threat
+  landscape changes.
+- **Offboarding protocol:** [What happens to this file and any
+  agent-embedded security assumptions if the CTO departs]
 
-## Using a manifest with an agent
+## 7. Review & Accountability
 
-Point your agent framework (Claude Code, an internal copilot, an MCP
-server, etc.) at the raw file for the relevant role, e.g.:
+Reviewed quarterly; consistent with NIST AI RMF practices of clearly
+defined responsibilities and ongoing monitoring; AI governance is a
+standing board agenda item.
 
-```
-https://raw.githubusercontent.com/yadavranjan2023/Exec-Skills/main/cto/CTO.SKILL.md
-```
+## 8. Change Log
 
-Load it as system context or a runtime-loaded skill at the start of a
-session. Note that these files describe the *rules* — whether an agent
-actually halts on a Tier 1 trigger depends on your agent runtime
-enforcing that behavior (a pre-action check, a wrapper, etc.), not on
-the file alone.
-
-## Governance of this repo
-
-- Every manifest requires sign-off from its named owner via
-  `.github/CODEOWNERS` — no direct pushes to `main`.
-- Every PR touching a `SKILL.md` file is linted by
-  `scripts/validate_skill.py`, which checks that:
-  - YAML frontmatter is present and required fields aren't empty or
-    still placeholders,
-  - `last_reviewed` isn't stale (default threshold: 100 days),
-  - required sections (Tier 1, Tier 2, Ownership, Review &
-    Accountability) haven't been renamed or deleted.
-- Reviews happen **quarterly at minimum**. Log the review as a PR —
-  even an empty diff with "reviewed, no changes, approved by [name]" —
-  so there's a defensible record rather than relying on memory.
-- AI governance tied to these manifests should be a **standing board
-  agenda item**, reviewed at every meeting, not only after an incident.
-
-## Setup checklist
-
-- [ ] Replace every `@handle` placeholder in `.github/CODEOWNERS` with
-      real GitHub usernames or team handles.
-- [ ] Fill in the bracketed placeholders (`[Name]`, `[$ threshold]`,
-      etc.) in each role's manifest with actual priorities and
-      boundaries.
-- [ ] Enable branch protection on `main`: require pull requests,
-      require CODEOWNERS review, require the `validate-skill-files`
-      status check to pass.
-- [ ] Confirm the offboarding protocol in each manifest's Ownership
-      section reflects your actual HR/IT process for role transitions.
-
-## Background
-
-This framework draws on the Two-Tier governance model and the
-"rights-by-design" approach described in Rani Yadav-Ranjan's
-*Constitutional Democracy in the Algorithmic Age* (Springer, 2026), and
-is broadly consistent with NIST's AI Risk Management Framework emphasis
-on clearly defined responsibilities, ongoing monitoring, and executive
-accountability for AI-related risk decisions.
-
-This repo is a governance starting structure, not legal or compliance
-advice. Route final language through Legal, Security, and Risk before
-deploying any manifest into a live agent workflow.
+| Date | Change | Approved by |
+|---|---|---|
+| [YYYY-MM-DD] | Initial version | [ ] |
