@@ -5,12 +5,12 @@ description: >
   copilots. Operationalizes user rights, accessibility benchmarks (such
   as WCAG 2.1 AA), and explicit consent requirements that agents must
   honor across product decisions.
-owner: "[CPO Name]"
+owner: "Priya Patel"
 role: "CPO"
 version: "1.0"
-last_reviewed: "[YYYY-MM-DD]"
+last_reviewed: "2026-08-24"
 review_cadence: "Quarterly, and at every board meeting per standing agenda item"
-authorized_by: "[Board / General Counsel / Privacy Officer]"
+authorized_by: "Chief Privacy Officer"
 ---
 
 # CPO.SKILL.md

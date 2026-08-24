@@ -6,12 +6,12 @@ description: >
   triggers, and corporate core values that agents must honor when
   drafting strategy, summarizing board materials, or acting on the
   CEO's behalf.
-owner: "[CEO Name]"
+owner: "Maria Chen"
 role: "CEO"
 version: "1.0"
-last_reviewed: "[YYYY-MM-DD]"
+last_reviewed: "2026-08-24"
 review_cadence: "Quarterly, and at every board meeting per standing agenda item"
-authorized_by: "[Board / Chief of Staff / General Counsel]"
+authorized_by: "Board of Directors"
 ---
 
 # CEO.SKILL.md
@@ -82,9 +82,15 @@ be reconciled against:
 Conflicts are Tier 1 events: agents halt rather than silently
 prioritizing the CEO's instruction over another role's stated boundary.
 
-## 6. Ownership, Access & Lifecycle (including Voice Authorization) 
+## 6. Ownership, Access & Lifecycle (including Voice Authorization)
 
-Click Replace (not Replace All, since this exact heading should only appear once).
+- **Owner:** [ ]  **Editors:** [ ]  **Authorized users:** [ ]
+- **Update cadence:** Quarterly; ad hoc on major strategy shifts.
+- **Offboarding protocol:** [What happens to this file and any agents
+  trained on it if the CEO departs]
+- **Voice/provenance authorization:** Defines where and how an AI may
+  represent the CEO publicly (statements, media, internal comms) and how
+  authorized use is distinguished from spoofed or unauthorized use.
 
 ## 7. Review & Accountability
 

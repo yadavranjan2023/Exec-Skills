@@ -6,12 +6,12 @@ description: >
   parameters, and escalation rules so autonomous systems act consistently
   with the executive's judgment. Load this file whenever an agent is
   performing work on behalf of, or in the name of, this executive.
-owner: "[Executive Name / Title]"
-role: "[CEO / CTO / CPO / CLO / etc.]"
+owner: "Maria Chen, Chief Executive Officer"
+role: "CEO (replace with your own role: CEO, CTO, CPO, CLO, etc.)"
 version: "1.0"
-last_reviewed: "[YYYY-MM-DD]"
+last_reviewed: "2026-08-24"
 review_cadence: "Quarterly, and at every board meeting per standing agenda item"
-authorized_by: "[Name/Office with authority to approve changes]"
+authorized_by: "Board of Directors"
 ---
 
 # The Executive SKILL.md

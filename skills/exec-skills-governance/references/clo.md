@@ -5,12 +5,12 @@ description: >
   copilots. Establishes real-time regulatory compliance bounds and
   risk-flagging protocols that agents must apply across legal and
   contractual work.
-owner: "[CLO Name]"
+owner: "James Whitfield"
 role: "CLO"
 version: "1.0"
-last_reviewed: "[YYYY-MM-DD]"
+last_reviewed: "2026-08-24"
 review_cadence: "Quarterly, and at every board meeting per standing agenda item"
-authorized_by: "[Board / General Counsel]"
+authorized_by: "General Counsel"
 ---
 
 # CLO.SKILL.md

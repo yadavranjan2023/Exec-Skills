@@ -5,12 +5,12 @@ description: >
   copilots. Sets zero-trust security postures, encryption requirements,
   and telemetry standards that agents must enforce across technical
   decisions and workflows.
-owner: "[CTO Name]"
+owner: "David Osei"
 role: "CTO"
 version: "1.0"
-last_reviewed: "[YYYY-MM-DD]"
+last_reviewed: "2026-08-24"
 review_cadence: "Quarterly, and at every board meeting per standing agenda item"
-authorized_by: "[Board / CISO / General Counsel]"
+authorized_by: "Chief Information Security Officer"
 ---
 
 # CTO.SKILL.md
