@@ -82,15 +82,9 @@ be reconciled against:
 Conflicts are Tier 1 events: agents halt rather than silently
 prioritizing the CEO's instruction over another role's stated boundary.
 
-## 6. Ownership, Access & Voice Authorization
+## 6. Ownership, Access & Lifecycle (including Voice Authorization) 
 
-- **Owner:** [ ]  **Editors:** [ ]  **Authorized users:** [ ]
-- **Update cadence:** Quarterly; ad hoc on major strategy shifts.
-- **Offboarding protocol:** [What happens to this file and any agents
-  trained on it if the CEO departs]
-- **Voice/provenance authorization:** Defines where and how an AI may
-  represent the CEO publicly (statements, media, internal comms) and how
-  authorized use is distinguished from spoofed or unauthorized use.
+Click Replace (not Replace All, since this exact heading should only appear once).
 
 ## 7. Review & Accountability
 
